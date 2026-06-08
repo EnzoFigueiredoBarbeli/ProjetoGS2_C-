@@ -1,0 +1,39 @@
+/* ProjetoGS Space — Custom Styles */
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+}
+
+.card {
+    transition: box-shadow .2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1) !important;
+}
+
+.table th {
+    font-size: .8rem;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.progress {
+    border-radius: 10px;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    transition: width .6s ease;
+}
+
+/* Badge personalizado para perfil Admin */
+.badge-admin {
+    background: linear-gradient(90deg, #ffc107, #fd7e14);
+    color: #000;
+}

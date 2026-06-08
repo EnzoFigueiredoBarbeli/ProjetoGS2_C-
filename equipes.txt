@@ -1,0 +1,14 @@
+==========================================
+  FIAP — Global Solution 2026
+  Tema: Nova Economia Espacial
+  Disciplina: C# / ASP.NET
+==========================================
+
+INTEGRANTES:
+- [Nome Completo] — RM: XXXXXX
+- [Nome Completo] — RM: XXXXXX
+
+REPOSITÓRIO GITHUB:
+https://github.com/[seu-usuario]/ProjetoGS-Space
+
+==========================================

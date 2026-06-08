@@ -1,0 +1,41 @@
+@model ProjetoGS.Web.Models.TecnologiaViewModel
+@{
+    ViewData["Title"] = "Excluir Tecnologia";
+}
+
+<div class="mb-3">
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-arrow-left me-1"></i>Voltar
+    </a>
+</div>
+
+<div class="card border-0 shadow-sm border-danger" style="max-width:500px">
+    <div class="card-header bg-danger text-white border-0 py-3">
+        <h4 class="mb-0 fw-bold"><i class="bi bi-exclamation-triangle me-2"></i>Confirmar Exclusão</h4>
+    </div>
+    <div class="card-body p-4">
+        <p class="text-muted mb-3">Você está prestes a excluir permanentemente esta tecnologia:</p>
+
+        <div class="bg-light rounded p-3 mb-4">
+            <h5 class="fw-bold mb-1">@Model.Nome</h5>
+            <p class="text-muted small mb-1">@Model.Descricao</p>
+            <span class="badge bg-secondary">@Model.OrigemMissao</span>
+            <span class="badge ms-1" style="background:#e8f4fd;color:#0d6efd">@Model.CategoriaNome</span>
+        </div>
+
+        <div class="alert alert-warning py-2">
+            <i class="bi bi-exclamation-triangle me-1"></i>
+            <strong>Atenção:</strong> Esta ação não pode ser desfeita.
+        </div>
+
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-danger fw-semibold">
+                    <i class="bi bi-trash me-2"></i>Confirmar Exclusão
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
