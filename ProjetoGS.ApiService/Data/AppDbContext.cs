@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using ProjetoGS.ApiService.Models;
-
 namespace ProjetoGS.ApiService.Data;
 
 public class AppDbContext : DbContext
@@ -16,6 +15,8 @@ public class AppDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         // Seed: Categorias
+
+
         modelBuilder.Entity<Categoria>().HasData(
             new Categoria { Id = 1, Nome = "Saúde",       Descricao = "Tecnologias aplicadas à medicina e bem-estar" },
             new Categoria { Id = 2, Nome = "Agricultura",  Descricao = "Inovações para o agronegócio e produção de alimentos" },
@@ -25,6 +26,8 @@ public class AppDbContext : DbContext
         );
 
         // Seed: Tecnologias
+
+
         modelBuilder.Entity<Tecnologia>().HasData(
             new Tecnologia { Id = 1, Nome = "Espuma Viscoelástica", Descricao = "Desenvolvida pela NASA para absorção de impactos em assentos de naves.", OrigemMissao = "NASA - Anos 70", AnoDesenvolvimento = new DateTime(1970, 1, 1), CategoriaId = 3 },
             new Tecnologia { Id = 2, Nome = "Purificador de Água",  Descricao = "Sistema de filtragem iônica criado para missões tripuladas.", OrigemMissao = "Apollo", AnoDesenvolvimento = new DateTime(1968, 1, 1), CategoriaId = 2 },
@@ -33,7 +36,10 @@ public class AppDbContext : DbContext
             new Tecnologia { Id = 5, Nome = "Agronegócio de Precisão", Descricao = "GPS e dados satelitais aplicados à agricultura.", OrigemMissao = "GPS / NAVSTAR", AnoDesenvolvimento = new DateTime(1995, 1, 1), CategoriaId = 2 }
         );
 
+
         // Seed: Admin (BCrypt hash de "admin123")
+
+
         modelBuilder.Entity<Usuario>().HasData(
             new Usuario
             {
@@ -44,6 +50,8 @@ public class AppDbContext : DbContext
                 Perfil = "Administrador",
                 DataCadastro = new DateTime(2026, 1, 1)
             },
+
+
             new Usuario
             {
                 Id = 2,
@@ -56,3 +64,5 @@ public class AppDbContext : DbContext
         );
     }
 }
+
+
