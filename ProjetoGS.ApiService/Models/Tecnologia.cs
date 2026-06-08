@@ -16,7 +16,8 @@ public class Tecnologia
     public string Descricao { get; set; } = string.Empty;
 
     [MaxLength(200)]
-    public string OrigemMissao { get; set; } = string.Empty; // Ex: Apollo, ISS, Artemis
+    public string OrigemMissao { get; set; } = string.Empty;
+
 
     public DateTime AnoDesenvolvimento { get; set; }
 
