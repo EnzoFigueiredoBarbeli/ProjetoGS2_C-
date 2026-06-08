@@ -16,10 +16,10 @@ public class Usuario
     public string Email { get; set; } = string.Empty;
 
     [Required]
-    public string SenhaHash { get; set; } = string.Empty; // BCrypt
+    public string SenhaHash { get; set; } = string.Empty;
 
     [MaxLength(50)]
-    public string Perfil { get; set; } = "Pesquisador"; // Pesquisador | Administrador
+    public string Perfil { get; set; } = "Pesquisador"; 
 
     public DateTime DataCadastro { get; set; } = DateTime.UtcNow;
 }
