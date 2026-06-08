@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "ProjetoGS.Web": {
+    "http": {
       "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:55611;http://localhost:55613"
+      }
     }
   }
 }

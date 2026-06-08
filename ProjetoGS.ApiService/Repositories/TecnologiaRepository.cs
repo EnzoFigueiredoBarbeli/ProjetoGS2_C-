@@ -8,17 +8,48 @@ namespace ProjetoGS.ApiService.Repositories;
 public class TecnologiaRepository : ITecnologiaRepository
 {
     private readonly AppDbContext _context;
-
-    public TecnologiaRepository(AppDbContext context)
-    {
-        _context = context;
-    }
+    public TecnologiaRepository(AppDbContext context) => _context = context;
 
     public async Task<IEnumerable<Tecnologia>> GetAllAsync()
-        => await _context.Tecnologias.Include(t => t.Categoria).OrderByDescending(t => t.DataCadastro).ToListAsync();
+        => await _context.Tecnologias
+            .Include(t => t.Categoria)
+            .Select(t => new Tecnologia
+            {
+                Id                 = t.Id,
+                Nome               = t.Nome,
+                Descricao          = t.Descricao,
+                OrigemMissao       = t.OrigemMissao,
+                AnoDesenvolvimento = t.AnoDesenvolvimento,
+                DataCadastro       = t.DataCadastro,
+                CategoriaId        = t.CategoriaId,
+                Categoria          = new Categoria
+                {
+                    Id   = t.Categoria!.Id,
+                    Nome = t.Categoria.Nome
+                }
+            })
+            .OrderByDescending(t => t.DataCadastro)
+            .ToListAsync();
 
     public async Task<Tecnologia?> GetByIdAsync(int id)
-        => await _context.Tecnologias.Include(t => t.Categoria).FirstOrDefaultAsync(t => t.Id == id);
+        => await _context.Tecnologias
+            .Include(t => t.Categoria)
+            .Select(t => new Tecnologia
+            {
+                Id                 = t.Id,
+                Nome               = t.Nome,
+                Descricao          = t.Descricao,
+                OrigemMissao       = t.OrigemMissao,
+                AnoDesenvolvimento = t.AnoDesenvolvimento,
+                DataCadastro       = t.DataCadastro,
+                CategoriaId        = t.CategoriaId,
+                Categoria          = new Categoria
+                {
+                    Id   = t.Categoria!.Id,
+                    Nome = t.Categoria.Nome
+                }
+            })
+            .FirstOrDefaultAsync(t => t.Id == id);
 
     public async Task<Tecnologia> CreateAsync(Tecnologia tecnologia)
     {
@@ -32,13 +63,11 @@ public class TecnologiaRepository : ITecnologiaRepository
     {
         var existing = await _context.Tecnologias.FindAsync(id);
         if (existing is null) return null;
-
         existing.Nome               = tecnologia.Nome;
         existing.Descricao          = tecnologia.Descricao;
         existing.OrigemMissao       = tecnologia.OrigemMissao;
         existing.AnoDesenvolvimento = tecnologia.AnoDesenvolvimento;
         existing.CategoriaId        = tecnologia.CategoriaId;
-
         await _context.SaveChangesAsync();
         return existing;
     }
@@ -47,7 +76,6 @@ public class TecnologiaRepository : ITecnologiaRepository
     {
         var existing = await _context.Tecnologias.FindAsync(id);
         if (existing is null) return false;
-
         _context.Tecnologias.Remove(existing);
         await _context.SaveChangesAsync();
         return true;
@@ -60,11 +88,7 @@ public class TecnologiaRepository : ITecnologiaRepository
         var totalSetores     = await _context.Categorias.CountAsync();
 
         var porCategoria = await _context.Categorias
-            .Select(c => new
-            {
-                Categoria = c.Nome,
-                Total     = c.Tecnologias.Count
-            })
+            .Select(c => new { Categoria = c.Nome, Total = c.Tecnologias.Count })
             .ToListAsync();
 
         var recentes = await _context.Tecnologias
@@ -73,21 +97,12 @@ public class TecnologiaRepository : ITecnologiaRepository
             .Take(5)
             .Select(t => new
             {
-                t.Id,
-                t.Nome,
-                t.OrigemMissao,
+                t.Id, t.Nome, t.OrigemMissao,
                 Categoria    = t.Categoria!.Nome,
                 t.DataCadastro
             })
             .ToListAsync();
 
-        return new
-        {
-            TotalTecnologias = totalTecnologias,
-            TotalMissoes     = totalMissoes,
-            TotalSetores     = totalSetores,
-            PorCategoria     = porCategoria,
-            Recentes         = recentes
-        };
+        return new { TotalTecnologias = totalTecnologias, TotalMissoes = totalMissoes, TotalSetores = totalSetores, PorCategoria = porCategoria, Recentes = recentes };
     }
 }

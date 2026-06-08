@@ -1,12 +1,13 @@
 {
   "profiles": {
-    "ProjetoGS.ApiService": {
+    "http": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:55610;http://localhost:55612"
+      }
     }
   }
 }

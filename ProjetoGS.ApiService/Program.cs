@@ -2,20 +2,22 @@ using Microsoft.EntityFrameworkCore;
 using ProjetoGS.ApiService.Data;
 using ProjetoGS.ApiService.Repositories;
 using ProjetoGS.ApiService.Repositories.Interfaces;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// MySQL via Entity Framework
 var connString = builder.Configuration.GetConnectionString("projetogs")
     ?? "Server=localhost;Port=3306;Database=projetogs;User=root;Password=root123;";
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connString, ServerVersion.AutoDetect(connString)));
 
-// Repository Pattern
 builder.Services.AddScoped<ITecnologiaRepository, TecnologiaRepository>();
 
-builder.Services.AddControllers();
+// Ignora referências circulares no JSON
+builder.Services.AddControllers().AddJsonOptions(options =>
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -25,7 +27,6 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Migrate automaticamente
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
