@@ -19,6 +19,8 @@ public class CategoriaViewModel
     public string Descricao { get; set; } = string.Empty;
 }
 
+
+
 public class StatsViewModel
 {
     public int TotalTecnologias { get; set; }
