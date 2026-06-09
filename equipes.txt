@@ -5,10 +5,7 @@
 ==========================================
 
 INTEGRANTES:
-- [Nome Completo] — RM: XXXXXX
-- [Nome Completo] — RM: XXXXXX
-
-REPOSITÓRIO GITHUB:
-https://github.com/[seu-usuario]/ProjetoGS-Space
+- Enzo Barbeli RM554272
+- Felipe Santana RM554259
 
 ==========================================
